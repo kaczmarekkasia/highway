@@ -1,5 +1,6 @@
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -8,9 +9,10 @@ import java.util.Map;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 
 public class Highway {
-    Map<String, VehicleInfo> carsOnHighway;
+    Map<String, VehicleInfo> carsOnHighway = new HashMap<>();
 
     //     - metodę vehicleEntry(String numer_rejestracyjny, oraz CarType type) - która dodaje do kolekcji nową instancję VehicleInfo
 //    oraz wypisuje do konsoli komunikat. Metoda nic nie zwraca.
@@ -30,19 +32,21 @@ public class Highway {
 
     //    - metodę searchVehicle(String numer_rejestracyjny) - która szuka pojazdu i wypisuje jego informacje jeśli wciąż
 //    znajduje się na autostradzie
-    void serachVehicle(String registrationNr) {
+    VehicleInfo serachVehicle(String registrationNr) {
         if (carsOnHighway.containsKey(registrationNr)) {
-            System.out.println(carsOnHighway.get(registrationNr));
+            return carsOnHighway.get(registrationNr);
         } else {
             System.out.println("Searched vehicle is not on the highway.");
+            return null;
         }
     }
 
     //     - metodę wyjazdu - vehicleLeave(String numer_rejestracyjny) - która usuwa samochód z kolekcji, wypisuje komunikat,
 //    oraz na podstawie czasu jaki samochód znajdował się na autostradzie oblicza jej kwotę do zapłaty i wypisuje ją do konsoli.
-    void vehicleDeparture(String registrationNr) {
+    double vehicleDeparture(String registrationNr) {
         if (!carsOnHighway.containsKey(registrationNr)) {
             System.out.println("There is no such car on the highway!");
+            return 0;
 
         } else {
 
@@ -73,7 +77,7 @@ public class Highway {
             }
             Double tripCost = sekPrice * tripPeriod;
 
-            System.out.println("The car " + registrationNr + "  has left the highway. The trip cost is " + tripCost);
+            return tripCost;
 
         }
     }

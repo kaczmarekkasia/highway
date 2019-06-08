@@ -7,14 +7,13 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        Map<String, VehicleInfo> vehiclesOnHighway = new HashMap<>();
-        Highway highway = new Highway(vehiclesOnHighway);
+
+        Highway highway = new Highway();
 
         System.out.println("Welcome to the highway apllication!!");
 
         String komenda;
         do {
-
             System.out.println("What do you want to do? entry/departure/status");
             komenda = scanner.next().toUpperCase();
             try {
@@ -36,7 +35,7 @@ public class Main {
                         } else if (carT.equals("TRUCK")) {
                             vehicleInfo = new VehicleInfo(registrationNr, CarType.TRUCK);
                         } else {
-                            System.out.println("Wrong car type!");
+                            System.out.println("Wrong vehicle type!");
                             break;
                         }
                         try {
@@ -48,10 +47,10 @@ public class Main {
                         break;
 
                     case DEPARTURE:
-                        highway.vehicleDeparture(registrationNr);
+                        System.out.println("The trip cost is "+highway.vehicleDeparture(registrationNr));
                         break;
                     case STATUS:
-                        highway.serachVehicle(registrationNr);
+                        System.out.println(highway.serachVehicle(registrationNr));
                         break;
                 }
 
