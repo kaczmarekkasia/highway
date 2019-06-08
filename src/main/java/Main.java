@@ -12,10 +12,16 @@ public class Main {
 
         System.out.println("Welcome to the highway apllication!!");
 
+
         String komenda;
+
         do {
             System.out.println("What do you want to do? entry/departure/status");
             komenda = scanner.next().toUpperCase();
+            if (komenda.equalsIgnoreCase("q")){
+            break;
+            }
+
             try {
             Commands command = Commands.valueOf(komenda);
 
@@ -58,7 +64,7 @@ public class Main {
                 System.err.println("Wrong command..try again!\n");
             }
 
-        } while (!komenda.equals("q"));
+        } while (!komenda.equalsIgnoreCase("q"));
 
 
     }
